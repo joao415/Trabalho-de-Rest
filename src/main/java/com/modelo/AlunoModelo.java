@@ -6,6 +6,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "alunos")
 public class AlunoModelo extends UsuarioModelo {
+    
     private float nota1;
     private float nota2;
 

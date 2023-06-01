@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usuarios")
 public class ProfessorModelo extends UsuarioModelo {
+
     private String cnpj;
     private float salario;
 

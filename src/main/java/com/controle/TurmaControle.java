@@ -25,8 +25,12 @@ public class TurmaControle {
     private TurmaRepositorio acao;
 
     @PostMapping("")
-    public TurmaModelo cadastrar(@RequestBody TurmaModelo obj) {
-        return acao.save(obj);
+    public TurmaModelo cadastrar(@RequestBody TurmaModelo obj) { 
+        if(obj.getDisciplina().length()>=3){
+            return acao.save(obj);
+        }
+        System.out.println("Nome da disciplina é inválido! Precisa ter no min. 4 caracteres.");
+        return null;
     }
 
     @GetMapping("")

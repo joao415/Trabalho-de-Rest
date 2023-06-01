@@ -26,7 +26,11 @@ public class UsuarioControle {
 
     @PostMapping("")
     public UsuarioModelo cadastrar(@RequestBody UsuarioModelo obj) {
-        return acao.save(obj);
+        if(obj.getNome().length()>=3){
+            return acao.save(obj);
+        }
+        System.out.println("Nome do usuário é inválido! Precisa ter no min. 4 caracteres.");
+        return null;
     }
 
     @GetMapping("")
