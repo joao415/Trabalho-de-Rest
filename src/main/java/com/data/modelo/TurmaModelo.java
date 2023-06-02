@@ -1,4 +1,4 @@
-package com.modelo;
+package com.data.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity 
-@Table(name = "turmas")
+@Table(name = "turma")
   public class TurmaModelo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
