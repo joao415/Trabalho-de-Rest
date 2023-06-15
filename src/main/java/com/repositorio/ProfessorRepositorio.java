@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.data.modelo.UsuarioModelo;
 
-public interface UsuarioRepositorio extends CrudRepository<UsuarioModelo, Integer> {
+public interface ProfessorRepositorio extends CrudRepository<ProfessorRepositorio, Integer> {
     List<UsuarioModelo> findAllByDisciplina(String nome);
     List<UsuarioModelo> findAllByProfessor(String nascimento);
 }

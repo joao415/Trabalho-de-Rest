@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.data.modelo.UsuarioModelo;
-import com.repositorio.UsuarioRepositorio;
+import com.repositorio.ProfessorRepositorio;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -22,7 +22,7 @@ public class UsuarioControle {
     public static ArrayList<UsuarioModelo> Usuarioes = new ArrayList<UsuarioModelo>();
 
     @Autowired
-    private UsuarioRepositorio acao;
+    private ProfessorRepositorio acao;
 
     @PostMapping("")
     public UsuarioModelo cadastrar(@RequestBody UsuarioModelo obj) {
