@@ -17,10 +17,10 @@ import javax.persistence.Table;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String disciplina;
-    private String professor;
+    private static String professor;
 
     @ManyToMany(mappedBy = "turmas")
-    private List<AlunoModelo> alunos = new ArrayList<>();
+    public static List<AlunoModelo> alunos = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -37,8 +37,8 @@ import javax.persistence.Table;
     public String getProfessor() {
         return professor;
     }
-    public void setProfessor(String professor) {
-        this.professor = professor;
+    public static void setProfessor(String professor) {
+        professor = professor;
     }
     public TurmaModelo(long id, String disciplina, String professor) {
         this.id = id;

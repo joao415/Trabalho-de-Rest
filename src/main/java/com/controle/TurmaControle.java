@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.data.modelo.AlunoModelo;
 import com.data.modelo.TurmaModelo;
 import com.repositorio.TurmaRepositorio;
 
 @RestController
 @RequestMapping("/turmas")
 public class TurmaControle {
-    public static ArrayList<TurmaModelo> turmas = new ArrayList<TurmaModelo>();
 
     @Autowired
     private TurmaRepositorio acao;
 
     @PostMapping("")
     public TurmaModelo cadastrar(@RequestBody TurmaModelo obj) { 
-        if(obj.getDisciplina().length()>=3){
+        if(obj.getDisciplina().length()>=3 && obj.getDisciplina() != null) {
             return acao.save(obj);
         }
         System.out.println("Nome da disciplina é inválido! Precisa ter no min. 4 caracteres.");
@@ -51,6 +51,29 @@ public class TurmaControle {
     @DeleteMapping("{@codigo}")
     public void remover(@PathVariable int codigo) {
         acao.deleteById(codigo);
+    }
+
+    public void addAluno(AlunoModelo aluno) {
+        TurmaModelo.alunos.add(aluno);
+    }
+
+    public void setAlunos(ArrayList<AlunoModelo> alunos) {
+        TurmaModelo.alunos = alunos;
+    }
+
+    public AlunoModelo getAlunoById(long id) {
+        for (AlunoModelo aluno: TurmaModelo.alunos) {
+            if (aluno.getId() == id) {
+                return aluno;
+            }
+        }
+
+        return null;
+
+    } 
+
+    public void setProfessor(String professor) {
+        TurmaModelo.setProfessor(professor);
     }
 
 }
