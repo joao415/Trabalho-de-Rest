@@ -24,30 +24,21 @@ public class UsuarioControle {
     @Autowired
     private ProfessorRepositorio acao;
 
-    @PostMapping("")
-    public UsuarioModelo cadastrar(@RequestBody UsuarioModelo obj) {
-        if(obj.getNome().length()>=3){
-            return acao.save(obj);
-        }
-        System.out.println("Nome do usuário é inválido! Precisa ter no min. 4 caracteres.");
-        return null;
-    }
-
-    @GetMapping("")
-    public Iterable<UsuarioModelo> obter() {
-        return acao.findAll();
-    }
-    
-    @GetMapping("{@codigo}")
-    public Optional<UsuarioModelo> obterPorId(@RequestBody int codigo) {
-        return acao.findById(codigo);
-    }
-
-    @PutMapping("")
-    public UsuarioModelo alterar(@RequestBody UsuarioModelo obj){
-        return acao.save(obj);
-    }
-
+	/*
+	 * @PostMapping("") public UsuarioModelo cadastrar(@RequestBody UsuarioModelo
+	 * obj) { if(obj.getNome().length()>=3){ return acao.save(obj); } System.out.
+	 * println("Nome do usuário é inválido! Precisa ter no min. 4 caracteres.");
+	 * return null; }
+	 * 
+	 * @GetMapping("") public Iterable<UsuarioModelo> obter() { return
+	 * acao.findAll(); }
+	 * 
+	 * @GetMapping("{@codigo}") public Optional<UsuarioModelo>
+	 * obterPorId(@RequestBody int codigo) { return acao.findById(codigo); }
+	 * 
+	 * @PutMapping("") public UsuarioModelo alterar(@RequestBody UsuarioModelo obj){
+	 * return acao.save(obj); }
+	 */
     @DeleteMapping("{@codigo}")
     public void remover(@PathVariable int codigo) {
         acao.deleteById(codigo);
