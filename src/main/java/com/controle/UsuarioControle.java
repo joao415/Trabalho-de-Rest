@@ -39,6 +39,7 @@ public class UsuarioControle {
 	 * @PutMapping("") public UsuarioModelo alterar(@RequestBody UsuarioModelo obj){
 	 * return acao.save(obj); }
 	 */
+    
     @DeleteMapping("{@codigo}")
     public void remover(@PathVariable int codigo) {
         acao.deleteById(codigo);
