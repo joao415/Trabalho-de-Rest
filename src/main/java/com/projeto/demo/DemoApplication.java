@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@EntityScan(basePackages = {"com.data.modelo"})
+@EntityScan(basePackages = {"com.projeto.data.modelo"})
 public class DemoApplication {
 
 	public static void main(String[] args) {

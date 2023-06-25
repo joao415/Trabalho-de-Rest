@@ -1,4 +1,4 @@
-package com.controle;
+package com.projeto.controle;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.data.modelo.ProfessorModelo;
-import com.data.modelo.UsuarioModelo;
-import com.repositorio.ProfessorRepositorio;
+import com.projeto.data.modelo.ProfessorModelo;
+import com.projeto.data.modelo.UsuarioModelo;
+import com.projeto.repositorio.ProfessorRepositorio;
 
 @RestController
 @RequestMapping("/professor")

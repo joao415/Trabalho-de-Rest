@@ -1,22 +1,22 @@
-package com.data.modelo;
+package com.projeto.data.modelo;
 
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "alunos")
-public class AlunoModelo {
+@Table(name = "professor")
+public class ProfessorModelo {
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -57,15 +57,17 @@ public class AlunoModelo {
         this.nascimento = nascimento;
     }
     
-//	@ManyToMany
-//	@JoinColumn(name="aluno_turma", 
-//	joinColumns=    {@JoinColumn(name="aluno_id")}, 
-//	inverseJoinColumns=      {@JoinColumn(name="turma_id")})
-	@ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "aluno_turma", 
-        joinColumns = { @JoinColumn(name = "aluno_id") }, 
-        inverseJoinColumns = { @JoinColumn(name = "turma_id") })
-    public List<TurmaModelo> turmas;
-	
+    private float salario;
+
+    @OneToMany
+    @JoinColumn(name = "usuario_turma")
+    private List<TurmaModelo> turmas;
+
+    public float getSalario() {
+        return salario;
+    }
+    public void setSalario(float salario) {
+        this.salario = salario;
+    } 
+   
 }

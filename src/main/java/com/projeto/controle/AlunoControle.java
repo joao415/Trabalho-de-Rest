@@ -1,4 +1,4 @@
-package com.projeto.demo;
+package com.projeto.controle;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.data.modelo.AlunoModelo;
-import com.data.modelo.UsuarioModelo;
-
+import com.projeto.data.modelo.AlunoModelo;
+import com.projeto.data.modelo.UsuarioModelo;
+import com.projeto.repositorio.AlunoRepositorio;
 
 @RestController
 @RequestMapping("/aluno")
 public class AlunoControle {
-    public static ArrayList<AlunoRepositorio> Usuarioes = new ArrayList<AlunoModelo>();
-    	@Autowired
+    public static ArrayList<AlunoModelo> Usuarioes = new ArrayList<AlunoModelo>();
+
 	    private AlunoRepositorio acao;
 
 	
@@ -41,18 +41,18 @@ public class AlunoControle {
 		  return acao.findAll(); 
 	  }
 	  
-//	  @GetMapping("{@codigo}") public Optional<AlunoModelo> obterPorId(@RequestBody int codigo)
-//	  { 
-//		  return acao.findById(codigo);
-//	  }
+	  @GetMapping("{@codigo}") public Optional<AlunoModelo> obterPorId(@RequestBody int codigo)
+	  { 
+		  return acao.findById(codigo);
+	  }
 	  
 	  @PutMapping("") public AlunoModelo alterar(@RequestBody AlunoModelo obj){
 	  return acao.save(obj); }
 	 
     
-//    @DeleteMapping("{@codigo}")
-//    public void remover(@PathVariable int codigo) {
-//        acao.deleteById(codigo);
-//    }
+    @DeleteMapping("{@codigo}")
+    public void remover(@PathVariable int codigo) {
+        acao.deleteById(codigo);
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.controle;
+package com.projeto.controle;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.data.modelo.AlunoModelo;
-import com.data.modelo.TurmaModelo;
-import com.repositorio.TurmaRepositorio;
+import com.projeto.data.modelo.AlunoModelo;
+import com.projeto.data.modelo.TurmaModelo;
+import com.projeto.repositorio.TurmaRepositorio;
 
 @RestController
 @RequestMapping("/turmas")

@@ -1,23 +1,18 @@
-package com.data.modelo;
+package com.projeto.data.modelo;
 
 import java.util.Date;
-import java.util.List;
+
+//import com.data.enums.ETipoDocumento;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-
-@Entity
-@Table(name = "professor")
-public class ProfessorModelo {
-
-	@Id
+public abstract class UsuarioModelo {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
@@ -57,17 +52,12 @@ public class ProfessorModelo {
         this.nascimento = nascimento;
     }
     
-    private float salario;
+//	public ETipoDocumento getTipoDocumento() {
+//		return tipoDocumento;
+//	}
+//
+//	public void setTipoDocumento(ETipoDocumento tipoDocumento) {
+//		this.tipoDocumento = tipoDocumento;
+//	}
 
-    @OneToMany
-    @JoinColumn(name = "usuario_turma")
-    private List<TurmaModelo> turmas;
-
-    public float getSalario() {
-        return salario;
-    }
-    public void setSalario(float salario) {
-        this.salario = salario;
-    } 
-   
 }
