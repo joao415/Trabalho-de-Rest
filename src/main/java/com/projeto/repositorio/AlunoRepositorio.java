@@ -3,11 +3,12 @@ package com.projeto.repositorio;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.projeto.data.modelo.AlunoModelo;
-import com.projeto.data.modelo.UsuarioModelo;
 
+@Repository
 public interface AlunoRepositorio extends CrudRepository<AlunoModelo, Integer> {
-    List<UsuarioModelo> findAllByDisciplina(String nome);
-    List<UsuarioModelo> findAllByProfessor(String nascimento);
+//    List<AlunoModelo> findAllByDisciplina(String nome);
+//    List<AlunoModelo> findAllByProfessorId(long professorId);
 }

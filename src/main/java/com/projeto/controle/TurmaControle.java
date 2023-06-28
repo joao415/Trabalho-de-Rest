@@ -21,59 +21,59 @@ import com.projeto.repositorio.TurmaRepositorio;
 @RequestMapping("/turmas")
 public class TurmaControle {
 
-    @Autowired
-    private TurmaRepositorio acao;
+	@Autowired
+	private TurmaRepositorio acao;
 
-    @PostMapping("")
-    public TurmaModelo cadastrar(@RequestBody TurmaModelo obj) { 
-        if(obj.getDisciplina().length()>=3 && obj.getDisciplina() != null) {
-            return acao.save(obj);
-        }
-        System.out.println("Nome da disciplina é inválido! Precisa ter no min. 4 caracteres.");
-        return null;
-    }
+	@PostMapping("")
+	public TurmaModelo cadastrar(@RequestBody TurmaModelo obj) {
+		if (obj.getDisciplina().length() >= 3 && obj.getDisciplina() != null) {
+			return acao.save(obj);
+		}
+		System.out.println("Nome da disciplina é inválido! Precisa ter no min. 4 caracteres.");
+		return null;
+	}
 
-    @GetMapping("")
-    public Iterable<TurmaModelo> obter() {
-        return acao.findAll();
-    }
+	@GetMapping("")
+	public Iterable<TurmaModelo> obter() {
+		return acao.findAll();
+	}
 
-    @GetMapping("{@codigo}")
-    public Optional<TurmaModelo> obterPorId(@RequestBody int codigo) {
-        return acao.findById(codigo);
-    }
+	@GetMapping("/{codigo}")
+	public Optional<TurmaModelo> obterPorId(@RequestBody int codigo) {
+		return acao.findById(codigo);
+	}
 
-    @PutMapping("")
-    public TurmaModelo alterar(@RequestBody TurmaModelo obj){
-        return acao.save(obj);
-    }
+	@PutMapping("")
+	public TurmaModelo alterar(@RequestBody TurmaModelo obj) {
+		return acao.save(obj);
+	}
 
-    @DeleteMapping("{@codigo}")
-    public void remover(@PathVariable int codigo) {
-        acao.deleteById(codigo);
-    }
+	@DeleteMapping("/{codigo}")
+	public void remover(@PathVariable int codigo) {
+		acao.deleteById(codigo);
+	}
 
-    public void addAluno(AlunoModelo aluno) {
-        TurmaModelo.alunos.add(aluno);
-    }
+	public void addAluno(AlunoModelo aluno) {
+		TurmaModelo.alunos.add(aluno);
+	}
 
-    public void setAlunos(ArrayList<AlunoModelo> alunos) {
-        TurmaModelo.alunos = alunos;
-    }
+	public void setAlunos(ArrayList<AlunoModelo> alunos) {
+		TurmaModelo.alunos = alunos;
+	}
 
-    public AlunoModelo getAlunoById(long id) {
-        for (AlunoModelo aluno: TurmaModelo.alunos) {
-            if (aluno.getId() == id) {
-                return aluno;
-            }
-        }
+	public AlunoModelo getAlunoById(long id) {
+		for (AlunoModelo aluno : TurmaModelo.alunos) {
+			if (aluno.getId() == id) {
+				return aluno;
+			}
+		}
 
-        return null;
+		return null;
 
-    } 
+	}
 
-    public void setProfessor(String professor) {
-        TurmaModelo.setProfessor(professor);
-    }
+	public void setProfessor(String professor) {
+		TurmaModelo.setProfessor(professor);
+	}
 
 }

@@ -24,9 +24,24 @@ public class ProfessorModelo {
     private Date nascimento;
 //    private ETipoDocumento tipoDocumento;
     private String documento;
+    private String diciplina;
+    
+    private float salario;
+
+    @OneToMany
+    @JoinColumn(name = "usuario_turma")
+    private List<TurmaModelo> turmas;
 
     public String getDocumento() {
 		return documento;
+	}
+
+	public String getDiciplina() {
+		return diciplina;
+	}
+
+	public void setDiciplina(String diciplina) {
+		this.diciplina = diciplina;
 	}
 
 	public void setDocumento(String documento) {
@@ -56,12 +71,6 @@ public class ProfessorModelo {
     public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
     }
-    
-    private float salario;
-
-    @OneToMany
-    @JoinColumn(name = "usuario_turma")
-    private List<TurmaModelo> turmas;
 
     public float getSalario() {
         return salario;

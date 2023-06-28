@@ -24,6 +24,7 @@ public class AlunoModelo {
     private Date nascimento;
 //    private ETipoDocumento tipoDocumento;
     private String documento;
+    private String diciplina;
 
     public String getDocumento() {
 		return documento;

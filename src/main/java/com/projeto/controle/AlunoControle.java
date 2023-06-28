@@ -14,45 +14,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.data.modelo.AlunoModelo;
-import com.projeto.data.modelo.UsuarioModelo;
 import com.projeto.repositorio.AlunoRepositorio;
 
 @RestController
 @RequestMapping("/aluno")
 public class AlunoControle {
-    public static ArrayList<AlunoModelo> Usuarioes = new ArrayList<AlunoModelo>();
+	public static ArrayList<AlunoModelo> Usuarioes = new ArrayList<AlunoModelo>();
+	@Autowired
+	private AlunoRepositorio acao;
 
-	    private AlunoRepositorio acao;
+	@PostMapping("")
+	public AlunoModelo cadastrar(@RequestBody AlunoModelo obj) {
+		if (obj.getNome().length() >= 3) {
+			return acao.save(obj);
+		}
+		System.out.println("Nome do usuário é inválido! Precisa ter no min. 4 caracteres.");
+		return null;
+	}
 
-	
-	  @PostMapping("")
-	  public AlunoModelo cadastrar(@RequestBody AlunoModelo obj)
-	  {
-		  if(obj.getNome().length()>=3){
-			  return acao.save(obj);
-		  }
-		  System.out.println("Nome do usuário é inválido! Precisa ter no min. 4 caracteres.");
-	  	return null;
-	  }
-	  
-	  @GetMapping("")
-	  public Iterable<AlunoModelo> obter()
-	  {
-		  return acao.findAll(); 
-	  }
-	  
-	  @GetMapping("{@codigo}") public Optional<AlunoModelo> obterPorId(@RequestBody int codigo)
-	  { 
-		  return acao.findById(codigo);
-	  }
-	  
-	  @PutMapping("") public AlunoModelo alterar(@RequestBody AlunoModelo obj){
-	  return acao.save(obj); }
-	 
-    
-    @DeleteMapping("{@codigo}")
-    public void remover(@PathVariable int codigo) {
-        acao.deleteById(codigo);
-    }
+	@GetMapping("")
+	public Iterable<AlunoModelo> obter() {
+		return acao.findAll();
+	}
+
+	@GetMapping("/{codigo}")
+	public Optional<AlunoModelo> obterPorId(@PathVariable int codigo) {
+		return acao.findById(codigo);
+	}
+
+	@PutMapping("")
+	public AlunoModelo alterar(@RequestBody AlunoModelo obj) {
+		return acao.save(obj);
+	}
+
+	@DeleteMapping("/{codigo}")
+	public void remover(@PathVariable int codigo) {
+		acao.deleteById(codigo);
+	}
 
 }
