@@ -29,9 +29,13 @@ public class ProfessorModelo {
     private float salario;
 
     @OneToMany
-    @JoinColumn(name = "usuario_turma")
+    @JoinColumn(name = "professor_id")
     private List<TurmaModelo> turmas;
 
+    public ProfessorModelo() {
+		// TODO Auto-generated constructor stub
+	}
+    
     public String getDocumento() {
 		return documento;
 	}

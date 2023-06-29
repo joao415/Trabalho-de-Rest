@@ -1,6 +1,7 @@
 package com.projeto.controle;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.data.modelo.AlunoModelo;
+import com.projeto.data.modelo.ProfessorModelo;
 import com.projeto.data.modelo.TurmaModelo;
+import com.projeto.repositorio.AlunoRepositorio;
+import com.projeto.repositorio.ProfessorRepositorio;
 import com.projeto.repositorio.TurmaRepositorio;
 
 @RestController
@@ -22,58 +26,110 @@ import com.projeto.repositorio.TurmaRepositorio;
 public class TurmaControle {
 
 	@Autowired
-	private TurmaRepositorio acao;
+	private TurmaRepositorio acaoTurma;
+	@Autowired
+	private AlunoRepositorio acaoAluno;
+	@Autowired
+	private ProfessorRepositorio acaoProfessor;
+
+//	@PostMapping("")
+//	public TurmaModelo cadastrar(@RequestBody TurmaModelo obj) {
+//		if (obj.getDisciplina().length() >= 3 && obj.getDisciplina() != null) {
+//			return acao.save(obj);
+//		}
+//		System.out.println("Nome da disciplina é inválido! Precisa ter no min. 4 caracteres.");
+//		return null;
+//	}
 
 	@PostMapping("")
 	public TurmaModelo cadastrar(@RequestBody TurmaModelo obj) {
-		if (obj.getDisciplina().length() >= 3 && obj.getDisciplina() != null) {
-			return acao.save(obj);
-		}
-		System.out.println("Nome da disciplina é inválido! Precisa ter no min. 4 caracteres.");
-		return null;
+	    if (obj.getDisciplina().length() >= 3 && obj.getDisciplina() != null) {
+	        if (obj.getAlunos() != null && !obj.getAlunos().isEmpty()) {
+	            List<AlunoModelo> alunosSalvos = new ArrayList<>();
+	            
+	            for (AlunoModelo aluno : obj.getAlunos()) {
+	                // Verifica se o aluno já está cadastrado
+	                if (aluno.getId() == 0) {
+	                    // Aluno ainda não cadastrado, então salva no banco de dados
+	                	// aluno.getTurmas().add(obj);
+	                    acaoAluno.save(aluno);
+	                }
+	                
+	                alunosSalvos.add(aluno);
+	            }
+	            
+	            // obj.setAlunos(alunosSalvos);
+	        }
+	        ProfessorModelo professor = obj.getProfessor();
+	        
+	        if (professor != null && professor.getId() == 0) {
+	        	// O professor ainda não foi persistido, então salve-o antes
+	        	acaoProfessor.save(professor);
+	        }
+	        
+	        return acaoTurma.save(obj);
+	    }
+	    
+	    throw new IllegalArgumentException("Nome da disciplina é inválido! Precisa ter no mínimo 4 caracteres.");
+	    // System.out.println("Nome da disciplina é inválido! Precisa ter no mínimo 4 caracteres.");
+	    // return null;
 	}
 
+	
 	@GetMapping("")
 	public Iterable<TurmaModelo> obter() {
-		return acao.findAll();
+		return acaoTurma.findAll();
 	}
 
 	@GetMapping("/{codigo}")
 	public Optional<TurmaModelo> obterPorId(@RequestBody int codigo) {
-		return acao.findById(codigo);
+		return acaoTurma.findById(codigo);
 	}
 
 	@PutMapping("")
 	public TurmaModelo alterar(@RequestBody TurmaModelo obj) {
-		return acao.save(obj);
+		return acaoTurma.save(obj);
 	}
 
 	@DeleteMapping("/{codigo}")
 	public void remover(@PathVariable int codigo) {
-		acao.deleteById(codigo);
+		acaoTurma.deleteById(codigo);
 	}
 
-	public void addAluno(AlunoModelo aluno) {
-		TurmaModelo.alunos.add(aluno);
-	}
-
-	public void setAlunos(ArrayList<AlunoModelo> alunos) {
-		TurmaModelo.alunos = alunos;
-	}
-
-	public AlunoModelo getAlunoById(long id) {
-		for (AlunoModelo aluno : TurmaModelo.alunos) {
-			if (aluno.getId() == id) {
-				return aluno;
-			}
+	@PutMapping("/{codigo}")
+	public void addAlunoNaTurma(@PathVariable int codigo, @RequestBody AlunoModelo aluno) {
+		Optional<TurmaModelo> turmaOpt = acaoTurma.findById(codigo);
+		
+		if(turmaOpt != null)
+		{
+			TurmaModelo turma = turmaOpt.get();
+			turma.getAlunos().add(aluno);
+			
+			acaoTurma.save(turma);
 		}
-
-		return null;
-
+		else {
+			throw new NullPointerException("Não Existe Turma!");
+		}
+			
 	}
-
-	public void setProfessor(String professor) {
-		TurmaModelo.setProfessor(professor);
-	}
+//
+//	public void setAlunos(ArrayList<AlunoModelo> alunos) {
+//		alunos = alunos;
+//	}
+//
+//	public AlunoModelo getAlunoById(long id) {
+//		for (AlunoModelo aluno : TurmaModelo.alunos) {
+//			if (aluno.getId() == id) {
+//				return aluno;
+//			}
+//		}
+//
+//		return null;
+//
+//	}
+//
+//	public void setProfessor(String professor) {
+//		setProfessor(professor);
+//	}
 
 }

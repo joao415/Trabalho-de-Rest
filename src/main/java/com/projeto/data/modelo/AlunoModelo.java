@@ -1,5 +1,6 @@
 package com.projeto.data.modelo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,20 +14,29 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
-
 @Entity
 @Table(name = "alunos")
 public class AlunoModelo {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String nome;
-    private Date nascimento;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	
+	private String nome;
+	private Date nascimento;
 //    private ETipoDocumento tipoDocumento;
-    private String documento;
-    private String diciplina;
+	private String documento;
+	private String diciplina;
 
-    public String getDocumento() {
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "aluno_turma", joinColumns = { @JoinColumn(name = "aluno_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "turma_id") })
+	public List<TurmaModelo> turmas = new ArrayList<>();
+
+	public AlunoModelo() {
+		
+	}
+	
+	public String getDocumento() {
 		return documento;
 	}
 
@@ -35,38 +45,43 @@ public class AlunoModelo {
 	}
 
 	public long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public Date getNascimento() {
-        return nascimento;
-    }
+	public Date getNascimento() {
+		return nascimento;
+	}
 
-    public void setNascimento(Date nascimento) {
-        this.nascimento = nascimento;
-    }
-    
-//	@ManyToMany
-//	@JoinColumn(name="aluno_turma", 
-//	joinColumns=    {@JoinColumn(name="aluno_id")}, 
-//	inverseJoinColumns=      {@JoinColumn(name="turma_id")})
-	@ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "aluno_turma", 
-        joinColumns = { @JoinColumn(name = "aluno_id") }, 
-        inverseJoinColumns = { @JoinColumn(name = "turma_id") })
-    public List<TurmaModelo> turmas;
-	
+	public void setNascimento(Date nascimento) {
+		this.nascimento = nascimento;
+	}
+
+	public String getDiciplina() {
+		return diciplina;
+	}
+
+	public void setDiciplina(String diciplina) {
+		this.diciplina = diciplina;
+	}
+
+	public List<TurmaModelo> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(ArrayList<TurmaModelo> turmas) {
+		this.turmas = turmas;
+	}
+
 }
