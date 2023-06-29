@@ -19,7 +19,6 @@ import com.projeto.repositorio.AlunoRepositorio;
 @RestController
 @RequestMapping("/aluno")
 public class AlunoControle {
-	public static ArrayList<AlunoModelo> Usuarioes = new ArrayList<AlunoModelo>();
 	@Autowired
 	private AlunoRepositorio acao;
 

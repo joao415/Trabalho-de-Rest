@@ -19,7 +19,6 @@ import com.projeto.repositorio.ProfessorRepositorio;
 @RestController
 @RequestMapping("/professor")
 public class ProfessorControle {
-	public static ArrayList<ProfessorModelo> Usuarioes = new ArrayList<ProfessorModelo>();
 	@Autowired
 	private ProfessorRepositorio acao;
 

@@ -32,38 +32,19 @@ public class TurmaControle {
 	@Autowired
 	private ProfessorRepositorio acaoProfessor;
 
-//	@PostMapping("")
-//	public TurmaModelo cadastrar(@RequestBody TurmaModelo obj) {
-//		if (obj.getDisciplina().length() >= 3 && obj.getDisciplina() != null) {
-//			return acao.save(obj);
-//		}
-//		System.out.println("Nome da disciplina é inválido! Precisa ter no min. 4 caracteres.");
-//		return null;
-//	}
-
 	@PostMapping("")
 	public TurmaModelo cadastrar(@RequestBody TurmaModelo obj) {
 	    if (obj.getDisciplina().length() >= 3 && obj.getDisciplina() != null) {
 	        if (obj.getAlunos() != null && !obj.getAlunos().isEmpty()) {
-	            List<AlunoModelo> alunosSalvos = new ArrayList<>();
-	            
 	            for (AlunoModelo aluno : obj.getAlunos()) {
-	                // Verifica se o aluno já está cadastrado
 	                if (aluno.getId() == 0) {
-	                    // Aluno ainda não cadastrado, então salva no banco de dados
-	                	// aluno.getTurmas().add(obj);
 	                    acaoAluno.save(aluno);
 	                }
-	                
-	                alunosSalvos.add(aluno);
 	            }
-	            
-	            // obj.setAlunos(alunosSalvos);
 	        }
 	        ProfessorModelo professor = obj.getProfessor();
 	        
 	        if (professor != null && professor.getId() == 0) {
-	        	// O professor ainda não foi persistido, então salve-o antes
 	        	acaoProfessor.save(professor);
 	        }
 	        

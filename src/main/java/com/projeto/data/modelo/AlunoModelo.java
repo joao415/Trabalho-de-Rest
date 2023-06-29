@@ -25,7 +25,6 @@ public class AlunoModelo {
 	private Date nascimento;
 //    private ETipoDocumento tipoDocumento;
 	private String documento;
-	private String diciplina;
 
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "aluno_turma", joinColumns = { @JoinColumn(name = "aluno_id") }, inverseJoinColumns = {
@@ -67,15 +66,7 @@ public class AlunoModelo {
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
 	}
-
-	public String getDiciplina() {
-		return diciplina;
-	}
-
-	public void setDiciplina(String diciplina) {
-		this.diciplina = diciplina;
-	}
-
+	
 	public List<TurmaModelo> getTurmas() {
 		return turmas;
 	}
